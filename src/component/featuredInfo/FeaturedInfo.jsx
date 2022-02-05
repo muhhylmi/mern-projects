@@ -11,8 +11,11 @@ export default function FeaturedInfo() {
     const getIncome = async () => {
       try {
         const res = await userRequest.get("orders/income");
-        setIncome(res.data);
-        setPerc((res.data[1].total * 100) / res.data[0].total - 100);
+        const list = res.data.sort((a, b) => {
+          return a._id - b._id;
+        });
+        setIncome(list);
+        setPerc((list[1].total * 100) / list[0].total - 100);
       } catch {}
     };
     getIncome();

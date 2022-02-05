@@ -1,14 +1,12 @@
 import "./productList.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline } from "@mui/icons-material";
-import { productRows } from "../../dummyData";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../redux/apiCalls";
 
 export default function ProductList() {
-  const [data, setData] = useState(productRows);
   const products = useSelector((state) => state.product.products);
 
   const dispatch = useDispatch();
@@ -64,6 +62,12 @@ export default function ProductList() {
 
   return (
     <div className="productList">
+      <div className="productTitleContainer">
+        <h1 className="productTitle">Product List</h1>
+        <Link to="/newproduct">
+          <button className="productAddButton">Create</button>
+        </Link>
+      </div>
       <DataGrid
         rows={products}
         disableSelectionOnClick
